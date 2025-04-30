@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceFlow - Strategy Recommendation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0a0b24;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        header {
+            padding: 24px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            position: relative;
+            height: 24px;
+            width: 32px;
+        }
+
+        .logo-icon::before {
+            content: "";
+            position: absolute;
+            height: 12px;
+            width: 12px;
+            background-color: white;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+
+        .logo-icon::after {
+            content: "";
+            position: absolute;
+            height: 12px;
+            width: 24px;
+            background-color: white;
+            border-radius: 12px;
+            right: 0;
+            bottom: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #93c5fd;
+        }
+
+        /* Main Content */
+        main {
+            padding: 32px 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9999px;
+            padding: 12px 24px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-secondary {
+            background-color: #1a1b3a;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #252650;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-icon {
+            margin-left: 8px;
+        }
+
+        /* Strategy Cards */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .strategy-card {
+            background-color: #1a1b3a;
+            border-radius: 24px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+        }
+
+        .bookmark-btn:hover {
+            color: white;
+        }
+
+        .card-details {
+            margin-bottom: 24px;
+        }
+
+        .card-details p {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-sm {
+            padding: 6px 16px;
+            font-size: 14px;
+        }
+
+        .rating {
+            display: flex;
+            margin-top: 16px;
+            gap: 4px;
+        }
+
+        .star {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .star.filled {
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            padding: 32px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .action-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <header>
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <span>FinanceFlow</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">HOME</a>
+                    <a href="#">ABOUT</a>
+                    <a href="#">PRICING</a>
+                    <a href="#">TOKENS</a>
+                    <a href="#">BLOG</a>
+                    <a href="#">CONTACT US</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <h1>Strategy Recommendation</h1>
+
+            <!-- Action Buttons -->
+            <div class="action-bar">
+                <button class="btn btn-primary">Suggest Matching Strategy</button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary">
+                        Return: High to Low
+                        <span class="dropdown-icon">▼</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Strategy Cards -->
+            <div class="strategy-grid" id="strategyGrid">
+                <!-- Strategy cards will be generated by JavaScript -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>©COPYRIGHT FINANCE 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Strategy data
+            const strategies = [
+                { id: 1, risk: 'Moderate', return: '70%', duration: '5 years', rating: 3 },
+                { id: 2, risk: 'Moderate', return: '70%', duration: '5 years', rating: 3 },
+                { id: 3, risk: 'Moderate', return: '70%', duration: '5 years', rating: 3 },
+                { id: 4, risk: 'Moderate', return: '70%', duration: '5 years', rating: 3 }
+            ];
+
+            const strategyGrid = document.getElementById('strategyGrid');
+
+            // Generate strategy cards
+            strategies.forEach(strategy => {
+                const card = document.createElement('div');
+                card.className = 'strategy-card';
+
+                // Create card content
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h2 class="card-title">Strategy ${strategy.id}</h2>
+                        <button class="bookmark-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-details">
+                        <p>Risk level: ${strategy.risk}</p>
+                        <p>Return: ${strategy.return}</p>
+                        <p>Duration: ${strategy.duration}</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary btn-sm">View detail</button>
+                        <button class="btn btn-secondary btn-sm">Add to plan</button>
+                    </div>
+                    <div class="rating">
+                        ${generateStars(strategy.rating)}
+                    </div>
+                `;
+
+                strategyGrid.appendChild(card);
+            });
+
+            // Generate star rating HTML
+            function generateStars(rating) {
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    const filled = i <= rating ? 'filled' : '';
+                    starsHtml += `
+                        <svg class="star ${filled}" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${i <= rating ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    `;
+                }
+                return starsHtml;
+            }
+
+            // Add event listeners for bookmark buttons
+            document.querySelectorAll('.bookmark-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+
+            // Add event listeners for dropdown
+            const dropdown = document.querySelector('.dropdown button');
+            dropdown.addEventListener('click', function() {
+                // Dropdown functionality would go here
+                console.log('Dropdown clicked');
+            });
+        });
+    </script>
+</body>
+</html>
